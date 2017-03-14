@@ -1,0 +1,38 @@
+<html>
+  <head>
+    {% load static %}
+    <title> FunBook</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "login/phi.png" %}"/>
+    <link href="{% static "login/style.css" %}" rel="stylesheet">
+    <link href="{% static "login/bootstrap/CSS/bootstrap.css" %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#">φ FunBook</a>
+          </a>
+        </div>
+      </div>
+  </nav>
+
+
+  <form action="." method="post">
+    {{question_form.as_p }}
+    {% csrf_token %}
+    <ul class="nav nav-pills">
+      <li role = "presentation">
+        <a href="/socrates/">
+          <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"</span>Volver
+        </a></li>
+      <li role = presentation>
+    <p><a href="/socrates/"><input type="submit" value="Add question">
+    </a></p></li>
+  </form>
+
+
+
+
+
+

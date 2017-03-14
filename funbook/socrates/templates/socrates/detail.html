@@ -1,0 +1,57 @@
+<html>
+  <head>
+    {% load static %}
+    <title> FunBook</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "login/phi.png" %}"/>
+    <link href="{% static "login/style.css" %}" rel="stylesheet">
+    <link href="{% static "login/bootstrap/CSS/bootstrap.css" %}" rel="stylesheet">
+  </head>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/socrates">φ FunBook</a>
+          </a>
+        </div>
+      </div>
+  </nav>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ question.owner }}</h3>
+  </div>
+   <div class="panel-body">{{ question.pub_date }}</div>
+</div>
+
+<div class="well"><h2>{{ question.question_text }}</h2>
+<h3>{{ question.question_body }}</h3></div>
+
+{% with comments.count as total_comments %}
+  <h3>
+    {{ total_comments }} comment{{ total_comments|pluralize }}
+  </h3>
+{% endwith %}
+
+{% for comment in comments.all %}
+  <div class="comment">
+    <p class="info">
+      Comment {{ forloop.counter }} by {{ comment.ownerComment }}
+      on {{ comment.comment_date }}
+    </p>
+    {{ comment.comment_text|linebreaks }}
+  </div>
+{% empty %}
+  <p>There are no comments yet.</p>
+{% endfor %}
+
+{% if new_comment %}
+  <h2>Your comment has been added.</h2>
+{% else %}
+  <h2>Add a new comment</h2>
+  <form action="." method="post">
+    {{ comment_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add comment"></p>
+  </form>
+{% endif %}
+

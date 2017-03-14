@@ -1,0 +1,49 @@
+<html>
+  <head>
+    {% load static %}
+    <title> FunBook</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "login/phi.png" %}"/>
+    <link href="{% static "login/style.css" %}" rel="stylesheet">
+    <link href="{% static "login/bootstrap/CSS/bootstrap.css" %}" rel="stylesheet">
+  </head>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#">φ FunBook</a>
+          </a>
+        </div>
+      </div>
+  </nav>
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+  <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<form class="loginform" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+<div class="form-group">
+  <table><br><br>
+    <tr>
+      <label for="exampleInputName2">{{ form.username.label_tag }}</label>
+      <input type="text" class="form-control" placeholder="Jane Doe" id= "{{ form.username }}
+    </tr>
+    <br><tr>
+     <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
+     <td></td>
+     <input type="password" class="form-control"  placeholder="Password" id={{ form.password}}
+    </tr>
+  </table>
+  <br><button class="btn btn-primary" type="submit">Login</button>
+  <input type="hidden" name="next" value="/socrates" />
+</div>
+</form>
+
+
